@@ -11,14 +11,41 @@ AI Document Assistant adalah aplikasi yang memungkinkan pengguna untuk:
 - 💬 Bertanya tentang isi dokumen dan mendapat jawaban yang relevan
 - 🧠 Menggunakan AI untuk memberikan jawaban yang kontekstual
 
+## 🏗️ Arsitektur Agent
+
+### Komponen Utama:
+
+- **Prompt + Memory**
+  - Prompt dinamis dengan konteks dari dokumen
+  - Memory menggunakan pendekatan **Semantic Memory** (vector store FAISS)
+- **Tool / Function**
+
+  - Tool utama: pencarian dokumen menggunakan vector similarity
+  - Tool opsional: fallback pencarian lokal (non-AI)
+
+- **Model**
+  - LLM: `gpt-3.5-turbo` dari OpenAI
+  - Embedding: `text-embedding-ada-002`
+  - Vector DB: FAISS (lokal)
+
+---
+
+## 🔁 Agent Loop (Observe → Decide → Act)
+
+1. **Observe**: User menginput pertanyaan dalam bahasa natural
+2. **Decide**: Sistem mencocokkan pertanyaan ke chunk dokumen terdekat (via vector search)
+3. **Act**: Jawaban dihasilkan oleh LLM berdasarkan konteks dokumen
+
+---
+
 ## 🚀 Fitur
 
-- ✅ **PDF Processing**: Memuat dan memproses dokumen PDF secara otomatis
-- ✅ **Vector Search**: Menggunakan FAISS untuk pencarian vector yang cepat
-- ✅ **OpenAI Integration**: Integrasi dengan OpenAI untuk embeddings dan LLM
-- ✅ **Interactive Chat**: Interface chat interaktif untuk tanya jawab
-- ✅ **Local Search**: Alternatif pencarian lokal tanpa API external
-- ✅ **Error Handling**: Penanganan error yang komprehensif
+- ✅ Memuat dokumen PDF internal
+- ✅ Preprocessing dan chunking otomatis
+- ✅ Pencarian berbasis vector
+- ✅ Integrasi OpenAI untuk QnA
+- ✅ Alternatif offline (local string matching)
+- ✅ Error handling user-friendly
 
 ## 📁 Struktur Proyek
 
@@ -174,41 +201,12 @@ ModuleNotFoundError: No module named 'langchain'
 pip install -r requirements.txt
 ```
 
-## 🎯 Fitur Mendatang
-
-- [ ] Support untuk multiple document formats (DOCX, TXT)
-- [ ] Web interface dengan Streamlit/Flask
-- [ ] Database untuk menyimpan chat history
-- [ ] Integration dengan model AI lokal (Ollama)
-- [ ] Advanced search filters
-
-## 📊 Performance
-
-| Metric    | Main.py (OpenAI) | Main_local.py |
-| --------- | ---------------- | ------------- |
-| Akurasi   | ⭐⭐⭐⭐⭐       | ⭐⭐⭐        |
-| Kecepatan | ⭐⭐⭐           | ⭐⭐⭐⭐⭐    |
-| Cost      | 💰💰💰           | 🆓            |
-| Offline   | ❌               | ✅            |
-
-## 🤝 Contributing
-
-1. Fork repository
-2. Buat feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit changes (`git commit -m 'Add amazing feature'`)
-4. Push ke branch (`git push origin feature/amazing-feature`)
-5. Buat Pull Request
-
-## 📝 License
-
-Project ini menggunakan MIT License. Lihat file `LICENSE` untuk detail.
-
 ## 👨‍💻 Author
 
 **AI Enhancement Course Project**
 
-- 📧 Email: [your-email@example.com]
-- 🌐 GitHub: [your-github-username]
+- 📧 Email: [listramawar@gmail.com]
+- 🌐 GitHub: [(https://github.com/MawarListra)]
 
 ## 🙏 Acknowledgments
 
